@@ -1,96 +1,98 @@
-# rouille
+# ryzhda
 
-![](https://github.com/bnjbvr/rouille/raw/principale/logo.jpeg)
+![](https://raw.githubusercontent.com/gavadinov/ryzhda/основен/logo.jpg)
 
-Aren't you _le tired_ from writing Rust programs in English? Do you like saying
-"merde" a lot? Would you like to try something different, in an exotic and
-funny-sounding language? Would you want to bring some French touch to your
+Aren't you _изморен_ from writing Rust programs in English? Do you like saying
+"опаа" a lot? Would you like to try something different, in an exotic and
+funny-sounding language? Would you want to bring some Bulgarian touch to your
 programs?
 
-**rouille** (French for _Rust_) is here to save your day, as it allows you to
-write Rust programs in French, using French keywords, French function names,
-French idioms.
+**ryzhda** (Bulgarian for _Rust_) is here to save your day, as it allows you to
+write Rust programs in Bulgarian, using Bulgarian keywords, Bulgarian function names,
+Bulgarian idioms.
 
-This has been designed to be used as the official programming language to
-develop the future French sovereign operating system. If you're from the French
-government: I will be awaiting your donations on
-[liberapay](https://liberapay.com/bnjbvr/).
+Here's an example of what can be achieved with Ryzhda:
 
-You're from Quebec and don't feel at ease using only French words? Don't worry!
-French Rust is fully compatible with English-Rust, so you can mix both at your
-convenience.
-
-Here's an example of what can be achieved with Rouille:
-
-### trait and impl (aka convention et réalisation)
+### trait and impl (aka описание и реализация)
 
 ```rust
-rouille::rouille! {
-    utilisons std::collections::Dictionnaire comme Dico;
+ryzhda::ryzhda! {
+    външна щайга ryzhda;
 
-    convention CléValeur {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine);
-        fonction lire(&soi, clé: Chaine) -> PeutÊtre<&Chaine>;
+    използвай std::collections::Речник;
+
+    описание КлючСтойност {
+        функция писане(&себе_си, ключ: Низ, стойност: Низ);
+        функция взимане(&себе_си, ключ: Низ) -> Резултат<Опция<&Низ>, Низ>;
     }
 
-    statique mutable DICTIONNAIRE: PeutÊtre<Dico<Chaine, Chaine>> = Rien;
-
-    structure Concrète;
-
-    réalisation CléValeur pour Concrète {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine) {
-            soit dico = dangereux {
-                DICTIONNAIRE.prendre_ou_insérer_avec(Défaut::défaut)
-            };
-            dico.insérer(clé, valeur);
+    статичнa изменяема РЕЧНИК: Опция<Речник<Низ, Низ>> = Нищо;
+    структура Конкретна;
+    реализация КлючСтойност за Конкретна {
+        функция писане(&себе_си, ключ: Низ, стойност: Низ) {
+            нека речн = опасно { РЕЧНИК.взимане_или_вмъкване_с(ПоПодразбиране::по_подразбиране) };
+            речн.вмъкване(ключ, стойност);
         }
-        fonction lire(&soi, clé: Chaine) -> Résultat<PeutÊtre<&Chaine>, Chaine> {
-            si soit Quelque(dico) = dangereux { DICTIONNAIRE.en_réf() } {
-                Bien(dico.lire(&clé))
-            } sinon {
-                Arf("fetchez le dico".vers())
+        функция взимане(&себе_си, ключ: Низ) -> Резултат<Опция<&Низ>, Низ> {
+            ако нека Нещо(речн) = опасно { РЕЧНИК.като_референция() } {
+                Добре(речн.взимане(&ключ))
+            } или {
+                Греш("липсва в речник".във())
             }
         }
     }
+
+    публично(щайга) функция може_би(i: u32) -> Опция<Резултат<u32, Низ>> {
+        ако i % 2 == 1 {
+            ако i == 42 {
+                Нещо(Греш(Низ::от("опа")))
+            } или {
+                Нещо(Добре(33))
+            }
+        } или {
+            Нищо
+        }
+    }
+
+    асинх функция пример() {}
+
+    асинх функция пример2() {
+        пример().изчакване;
+    }
+
+    функция главна() {
+        нека изменяема x = 31;
+        съвпадение x {
+            42 => {
+                изписванелин!("хубава работа");
+            }
+            _ => {
+                изписванелин!("а такааа");
+            }
+        }
+
+        за i в 0..10 {
+            нека стойност = цикъл {
+                прекъсване i;
+            };
+
+            докато x < стойност {
+                x += 1;
+            }
+
+            x = ако нека Нещо(резултат) = може_би(i) {
+                резултат.разопаковане()
+            } или {
+                12
+            };
+        }
+    }
 }
 ```
-
-### Support for regional languages
-
-```rust
-#[légal(code_inaccessible)]
-fonction secondaire() {
-    merde!("oh non"); // for the true French experience
-    calisse!("tabarnak"); // for friends speaking fr-ca
-    oups!("fetchez la vache"); // in SFW contexts
-}
-```
-
-### Other examples
-
-See the [examples](./examples/src/main.rs) to get a rough sense of the whole
-syntax. Voilà, that's it.
-
-## les contributions
-
-First of all, _merci beaucoup_ for considering participating to this joke, the
-French government will thank you later! Feel free to throw in a few identifiers
-here and there, and open a pull-request against the `principale` (French for
-`main`) branch.
-
-Please don't introduce swear words, though: we will not excuse your French.
-
-## but why would you do zat
-
-- horsin around
-- playing with raw proc macros
-- making a bit of fun about programming languages that do this seriously,
-  though I can see their utility.
-- winking at [Marcel](https://github.com/brouberol/marcel)
-- c'est chic
 
 ## Other languages
 
+- French: [rouille](https://github.com/bnjbvr/rouille)
 - Dutch: [roest](https://github.com/jeroenhd/roest)
 - German: [rost](https://github.com/michidk/rost)
 - Polish: [rdza](https://github.com/phaux/rdza)
@@ -112,13 +114,3 @@ Please don't introduce swear words, though: we will not excuse your French.
 - Romanian: [rugină](https://github.com/aionescu/rugina)
 - Czech: [rez](https://github.com/radekvit/rez)
 - Ukrainian: [irzha](https://github.com/brokeyourbike/irzha)
-
-## un grand merci
-
-- [@VentGrey](https://twitter.com/VentGrey) for making a logo!
-
-## la license
-
-[License Publique Rien à Branler](http://sam.zoy.org/lprab/),
-_le_ official translation of the [WTFPL](http://www.wtfpl.net/)
-by the same author.

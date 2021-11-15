@@ -1,0 +1,10 @@
+[package]
+name = "ryzhda"
+version = "0.1.0"
+edition = "2021"
+authors = ["Lyubomir Gavadinov <gavadinov@gmail.com>"]
+
+[dependencies]
+
+[lib]
+proc-macro = true

@@ -1,85 +1,72 @@
-rouille::rouille! {
-    externe cagette rouille;
+ryzhda::ryzhda! {
+    външна щайга ryzhda;
 
-    utilisons std::collections::Dictionnaire comme Dico;
+    използвай std::collections::Речник;
 
-    convention CléValeur {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine);
-        fonction lire(&soi, clé: Chaine) -> Résultat<PeutÊtre<&Chaine>, Chaine>;
+    описание КлючСтойност {
+        функция писане(&себе_си, ключ: Низ, стойност: Низ);
+        функция взимане(&себе_си, ключ: Низ) -> Резултат<Опция<&Низ>, Низ>;
     }
 
-    statique mutable DICTIONNAIRE: PeutÊtre<Dico<Chaine, Chaine>> = Rien;
-
-    structure Concrète;
-
-    réalisation CléValeur pour Concrète {
-        fonction écrire(&soi, clé: Chaine, valeur: Chaine) {
-            soit dico = dangereux {
-                DICTIONNAIRE.prendre_ou_insérer_avec(Défaut::défaut)
-            };
-            dico.insérer(clé, valeur);
+    статичнa изменяема РЕЧНИК: Опция<Речник<Низ, Низ>> = Нищо;
+    структура Конкретна;
+    реализация КлючСтойност за Конкретна {
+        функция писане(&себе_си, ключ: Низ, стойност: Низ) {
+            нека речн = опасно { РЕЧНИК.взимане_или_вмъкване_с(ПоПодразбиране::по_подразбиране) };
+            речн.вмъкване(ключ, стойност);
         }
-        fonction lire(&soi, clé: Chaine) -> Résultat<PeutÊtre<&Chaine>, Chaine> {
-            si soit Quelque(dico) = dangereux { DICTIONNAIRE.en_réf() } {
-                Bien(dico.lire(&clé))
-            } sinon {
-                Arf("fetchez le dico".vers())
+        функция взимане(&себе_си, ключ: Низ) -> Резултат<Опция<&Низ>, Низ> {
+            ако нека Нещо(речн) = опасно { РЕЧНИК.като_референция() } {
+                Добре(речн.взимане(&ключ))
+            } или {
+                Греш("липсва в речник".във())
             }
         }
     }
 
-    public(cagette) fonction peut_etre(i: u32) -> PeutÊtre<Résultat<u32, Chaine>> {
-        si i % 2 == 1 {
-            si i == 42 {
-                Quelque(Arf(Chaine::depuis("merde")))
-            } sinon {
-                Quelque(Bien(33))
+    публично(щайга) функция може_би(i: u32) -> Опция<Резултат<u32, Низ>> {
+        ако i % 2 == 1 {
+            ако i == 42 {
+                Нещо(Греш(Низ::от("опа")))
+            } или {
+                Нещо(Добре(33))
             }
-        } sinon {
-            Rien
+        } или {
+            Нищо
         }
     }
 
-    asynchrone fonction exemple() {
+    асинх функция пример() {}
+
+    асинх функция пример2() {
+        пример().изчакване;
     }
 
-    asynchrone fonction exemple2() {
-        exemple().attend;
-    }
-
-    fonction principale() {
-        soit mutable x = 31;
-
-        selon x {
+    функция главна() {
+        нека изменяема x = 31;
+        съвпадение x {
             42 => {
-                affiche!("omelette du fromage")
+                изписванелин!("хубава работа");
             }
-            _ => affiche!("voila")
+            _ => {
+                изписванелин!("а такааа");
+            }
         }
 
-        pour i de 0..10 {
-            soit val = boucle {
-                arrête i;
+        за i в 0..10 {
+            нека стойност = цикъл {
+                прекъсване i;
             };
 
-            tant que x < val {
+            докато x < стойност {
                 x += 1;
             }
 
-            x = si soit Quelque(resultat) = peut_etre(i) {
-                resultat.déballer()
-            } sinon {
+            x = ако нека Нещо(резултат) = може_би(i) {
+                резултат.разопаковане()
+            } или {
                 12
             };
         }
-
-        //secondaire();
-    }
-
-    #[légal(code_inaccessible)]
-    fonction secondaire() {
-        merde!("oh non"); // for the true French experience
-        calisse!("tabernacle"); // for friends speaking fr-ca
-        oups!("fetchez la vache"); // in SFW contexts
     }
 }

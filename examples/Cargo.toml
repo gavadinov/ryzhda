@@ -1,9 +1,10 @@
 [package]
-name = "rouille_examples"
+name = "ryzhda_examples"
 version = "0.1.0"
-edition = "2018"
+edition = "2021"
+authors = ["Lyubomir Gavadinov <gavadinov@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rouille = { path = "../rouille_proc_macro/" }
+ryzhda = { path = "../ryzhda_proc_macro/" }
